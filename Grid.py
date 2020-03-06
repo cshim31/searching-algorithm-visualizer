@@ -1,5 +1,29 @@
 import math
 import sys,pygame
+from tkinter import messagebox
+
+#initial graphic setting
+pygame.init()
+screen = pygame.display.set_mode((600,600))
+screen.fill((255,255,255))
+#data variables
+width = 50
+height = 50
+openNodes = []
+closedNodes = []
+map = []
+
+current = None
+start = None
+end = None
+
+#graphic variables
+red = (255,0,0)
+lime = (0,255,0)
+blue = (0,0,255)
+black = (0,0,0)
+whilte = (255,255,255)
+
 class Grid:
     def __init__(self,x,y):
         self.x = x
@@ -10,6 +34,8 @@ class Grid:
         self.weight = 10
         self.neighbor = []
         self.parent = None
+        self.color = 0
+        self.is_Wall = False
 
     def append_neighbor(self, map):
         #y-axis
@@ -22,11 +48,7 @@ class Grid:
             self.neighbor.append(map[self.x-1][self.y])
         if self.x+1<width:
             self.neighbor.append(map[self.x+1][self.y])
-        #diagonal
-   #     if self.x-1>=0 and self.y-1>=0:
-   #         self.neighbor.append(map[self.x - 1][self.y-1])
-   #     if self.x+1<width and self.y+1<height:
-   #         self.neighbor.append(map[self.x - 1][self.y-1])
+
 
     #h_cost = distance between target and object
     #g_cost = distance between origin and object
@@ -39,39 +61,35 @@ class Grid:
     def setParent(self,parent):
         self.parent = parent
 
+    def drawColor(self,color):
+        pygame.draw.rect(screen,color,(self.x*12,self.y*12,600/width,600/height))
 
 
-width = 50
-height = 50
-openNodes = []
-closedNodes = []
+# construct the map
 map = [0 for i in range(width)]
 for i in range(width):
     map[i] = [0 for i in range(height)]
 
-current = None
-start = None
-end = None
-
-    # constructure map
 for i in range(width):
     for j in range(height):
         map[i][j] = Grid(i,j)
-
-        #create neighbor
+     #   map[i][j].setColor(black)
+#create neighbor
 for i in range(height):
     for j in range(width):
         map[i][j].append_neighbor(map)
 
-        # define start and end
+# define start and end
 start = map[2][2]
-end = map[49][49]
+end = map[49][1]
 
+#Distance to target
 def Diagonal_distance(obj):
     return math.sqrt((obj.x-end.x)**2+(obj.y-end.y)**2)
-        #set up the data
-closedNodes.append(start)
+
+#Initialization
 current = start
+closedNodes.append(current)
 neighbors = current.neighbor
 for i in range(len(neighbors)):
     distance = Diagonal_distance(neighbors[i])
@@ -79,19 +97,13 @@ for i in range(len(neighbors)):
     openNodes.append(neighbors[i])
       #  show()
 
-    #return shortest distance to target
+for event in pygame.event.get():
+    if event.type == pygame.QUIT: sys.exit()
 
-def graphic():
-    size = w,h = 1000,1000
-    pygame.init()
-    screen = pygame.display.set_mode(size)
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT: sys.exit()
 
 def run():
     while(True):
         #find smallest f_cost grid
-        graphic()
         index = 0
         for i in range(len(openNodes)):
             if openNodes[index].f_cost>openNodes[i].f_cost:
@@ -104,24 +116,46 @@ def run():
         openNodes.remove(current)
         closedNodes.append(current)
         print("(",current.x,",",current.y,")")
+
         #target found
         if current is end:
+            while current.parent:
+                current.drawColor(blue)
+                pygame.display.update()
+                current = current.parent
+            messagebox.askokcancel('done')
             break
+
         neighbors = current.neighbor
         #update cost of neighbor grids
         for i in range(len(neighbors)):
             if neighbors[i] in closedNodes:
                 continue
+
+            #not in openNode
+            if neighbors[i] not in openNodes:
+                distance = Diagonal_distance(neighbors[i])
+                neighbors[i].updateDistance(distance, current.g_cost)
+                openNodes.append(neighbors[i])
+                neighbors[i].setParent(current)
+
+            #Already in openNode
             if neighbors[i].g_cost>(current.g_cost+current.weight):
                 distance = Diagonal_distance(neighbors[i])
                 neighbors[i].updateDistance(distance, current.g_cost)
                 neighbors[i].setParent(current)
-            if neighbors[i] not in openNodes:
-                openNodes.append(neighbors[i])
+
+
+        #graphic
+        for i in range(len(openNodes)):
+            openNodes[i].drawColor(lime)
+        for i in range(len(closedNodes)):
+            closedNodes[i].drawColor(red)
+        end.drawColor(black)
+        pygame.display.update()
 #execute program
 def main():
     run()
 main()
 
     #def show():
-
