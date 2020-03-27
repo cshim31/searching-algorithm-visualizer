@@ -1,5 +1,5 @@
-import math
 import sys,pygame
+<<<<<<< HEAD
 from tkinter import messagebox
 
 #initial graphic setting
@@ -23,6 +23,10 @@ lime = (0,255,0)
 blue = (0,0,255)
 black = (0,0,0)
 whilte = (255,255,255)
+=======
+
+INFINITY = 100000000
+>>>>>>> Updated
 
 class Grid:
     def __init__(self,x,y):
@@ -37,7 +41,7 @@ class Grid:
         self.color = 0
         self.is_Wall = False
 
-    def append_neighbor(self, map):
+    def append_neighbor(self,map,width,height):
         #y-axis
         if self.y-1>=0:
             self.neighbor.append(map[self.x][self.y-1])
@@ -49,6 +53,10 @@ class Grid:
         if self.x+1<width:
             self.neighbor.append(map[self.x+1][self.y])
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> Updated
 
     #h_cost = distance between target and object
     #g_cost = distance between origin and object
@@ -61,10 +69,18 @@ class Grid:
     def setParent(self,parent):
         self.parent = parent
 
+<<<<<<< HEAD
     def drawColor(self,color):
+=======
+    def drawColor(self,screen,color,width,height):
+>>>>>>> Updated
         pygame.draw.rect(screen,color,(self.x*12,self.y*12,600/width,600/height))
 
+    def setWall(self):
+        self.is_Wall = True
+        self.weight = INFINITY
 
+<<<<<<< HEAD
 # construct the map
 map = [0 for i in range(width)]
 for i in range(width):
@@ -159,3 +175,14 @@ def main():
 main()
 
     #def show():
+=======
+    def reset(self):
+        self.h_cost = 0
+        self.g_cost = 0
+        self.f_cost = 0
+        self.weight = 10
+        self.neighbor = []
+        self.parent = None
+        self.color = 0
+        self.is_Wall = False
+>>>>>>> Updated
