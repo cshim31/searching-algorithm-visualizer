@@ -11,7 +11,7 @@ Path finding software application for Windows, Mac OS X and Linux. Code implemen
 Program can be ran by python. Install Python IDE on official website and clone the following link :\
 https://github.com/cshim31/Path_Finding.git
 ## Compile and run
-Once compiled, type in starting x,y coordinates and destination. Then, press "Enter" to start the program.
+Once compiled, type in starting x,y coordinates and destination. Then, press "Enter" Key to start the program.
 ## Walls
 Walls can be drawn by mouse left click. After typing in starting x,y coordinate and destination, you are allowed to draw walls.
 You can create your own wall to test different simulation.
