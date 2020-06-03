@@ -8,8 +8,15 @@ Path finding software application for Windows, Mac OS X and Linux. Code implemen
 * Path_Finding/Grid.py - Grid class that fills map with display function and each grid's coordinates variable.
 * Path_Finding/Main.py - main file where compiling takes place. 
 ## Install
-Program can be ran by python. Install Python IDE on official website and clone the following link :\
-https://github.com/cshim31/Path_Finding.git
+Program can be ran by python. Install Python and pygame by typing following command :\
+For windows: 
+pip install pygame
+
+For Max OS X:
+sudo pip3 install hg+http://bitbucket.org/pygame/pygame
+
+For Linux:
+sudo apt-get install python-pygame
 
 ## Compile and run
 For git Cloning, type in following command on git bash\
