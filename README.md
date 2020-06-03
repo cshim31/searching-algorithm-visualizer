@@ -13,8 +13,8 @@ https://github.com/cshim31/Path_Finding.git
 
 ## Compile and run
 For git Cloning, type in following command on git bash\
-git clone https://github.com/cshim31/Path_Finding.git\
-Once compiled, type in starting x,y coordinates and destination. Then, press "Enter" Key to start the program.\
+git clone https://github.com/cshim31/Path_Finding.git \
+\Once compiled, type in starting x,y coordinates and destination. Then, press "Enter" Key to start the program.\
 Walls can be drawn by pressing mouse left click. After typing in starting x,y coordinate and destination, you are allowed to draw walls.\
 You can create your own wall to test different simulation.
 
