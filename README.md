@@ -9,13 +9,13 @@ Path finding software application for Windows, Mac OS X and Linux. Code implemen
 * Path_Finding/Main.py - main file where compiling takes place. 
 ## Install
 Program can be ran by python. Install Python and pygame by typing following command :\
-For windows: 
+For windows:\
 pip install pygame
 
-For Max OS X:
+For Max OS X:\
 sudo pip3 install hg+http://bitbucket.org/pygame/pygame
 
-For Linux:
+For Linux:\
 sudo apt-get install python-pygame
 
 ## Compile and run
