@@ -9,6 +9,7 @@ Path finding software application for Windows, Mac OS X and Linux. Code implemen
 * Path_Finding/Main.py - main file where compiling takes place. 
 ## Install
 Program can be ran by python. Install Python and pygame by typing following command :\
+
 For windows:\
 pip install pygame
 
