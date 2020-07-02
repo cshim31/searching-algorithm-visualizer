@@ -1,5 +1,5 @@
-# Path_Finding
-Path finding software application for Windows, Mac OS X and Linux. Code implements A* pathfinding algorithm. Program is conducted using python.
+# Path-Finding-Visualizer
+Path finding visualizer software application for Windows, Mac OS X and Linux. Code implements A* pathfinding algorithm. Program is conducted using python.
 ## Features
 * Simple navigation using A* path finding algorithm
 * Supports wall to be drawn on the map for test variation
