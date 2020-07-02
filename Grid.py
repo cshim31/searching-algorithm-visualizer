@@ -1,6 +1,6 @@
 import sys,pygame
-INFINITY = 100000000
-
+import Constant
+import Color
 class Grid:
     def __init__(self,x,y):
         self.x = x
@@ -8,42 +8,57 @@ class Grid:
         self.h_cost = 0
         self.g_cost = 0
         self.f_cost = 0
-        self.weight = 10
         self.neighbor = []
         self.parent = None
         self.color = 0
-        self.is_Wall = False
+        self.isWall = False
+        self.weight = 10
+        self.diagonalWeight = 14
 
-    def append_neighbor(self,map,width,height):
-        #y-axis
-        if self.y-1>=0:
-            self.neighbor.append(map[self.x][self.y-1])
-        if self.y+1<height:
-            self.neighbor.append(map[self.x][self.y+1])
-        #x-axis
-        if self.x-1>=0:
-            self.neighbor.append(map[self.x-1][self.y])
-        if self.x+1<width:
-            self.neighbor.append(map[self.x+1][self.y])
+    def appendNeighbor(self,map):
+        if self.y - 1 >= 0:
+            self.neighbor.append(map[self.x][self.y - 1])
+        if self.y + 1 < Constant.HEIGHT:
+            self.neighbor.append(map[self.x][self.y + 1])
+        if self.x - 1 >= 0:
+            self.neighbor.append(map[self.x - 1][self.y])
+        if self.x + 1 < Constant.WIDTH:
+            self.neighbor.append(map[self.x + 1][self.y])
 
+        if self.x - 1 >= 0 and self.y - 1 >= 0:
+            self.neighbor.append(map[self.x - 1][self.y - 1])
+        if self.x + 1 < Constant.WIDTH and self.y - 1 >= 0:
+            self.neighbor.append(map[self.x + 1][self.y - 1])
+        if self.x - 1 >= 0 and self.y + 1 < Constant.HEIGHT:
+            self.neighbor.append(map[self.x - 1][self.y + 1])
+        if self.x + 1 < Constant.WIDTH and self.y + 1 < Constant.HEIGHT:
+            self.neighbor.append(map[self.x + 1][self.y + 1])
 
-    #h_cost = distance between target and object
-    #g_cost = distance between origin and object
+    #h_cost = distance between target and current object
+    #g_cost = distance between origin and current object
     #f_cost = h_cost + g_cost
-    def updateDistance(self,h_cost,g_cost):
-        self.h_cost = h_cost
-        self.g_cost = g_cost+self.weight
-        self.f_cost = self.h_cost+self.g_cost
+    def updateCost(self,h_cost,g_cost, isDiagonal):
+        if isDiagonal :
+            self.h_cost = h_cost
+            self.g_cost = g_cost + self.diagonalWeight
+            self.f_cost = self.h_cost + self.g_cost
+
+        if not isDiagonal :
+            self.h_cost = h_cost
+            self.g_cost = g_cost + self.weight
+            self.f_cost = self.h_cost + self.g_cost
 
     def setParent(self,parent):
         self.parent = parent
 
-    def drawColor(self,screen,color,width,height):
-        pygame.draw.rect(screen,color,(self.x*12,self.y*12,600/width,600/height))
+    def drawColor(self,screen,color):
+        pygame.draw.rect(screen,Color.WHITE,(self.x * 11 + 25,self.y * 11 + 25,550/Constant.WIDTH,550/Constant.HEIGHT))
+        pygame.draw.rect(screen,color,(self.x * 11 + 26,self.y * 11 + 26,550/(Constant.WIDTH + 10),550/(Constant.HEIGHT + 10)))
 
     def setWall(self):
-        self.is_Wall = True
-        self.weight = INFINITY
+        self.isWall = True
+        self.weight = Constant.INFINITY
+        self.diagonalWeight = Constant.INFINITY
 
 
     def reset(self):
