@@ -5,7 +5,7 @@ import sys,pygame
 import time
 from tkinter import *
 from tkinter import messagebox, Frame, Menu, ttk
-
+from tkinter import ttk
 class Map:
     def __init__(self):
         self.openNodes = []
@@ -16,9 +16,16 @@ class Map:
         self.targetGrid = None
         self.time = None
         self.isPathVisible = None
+        self.algorithmType = None
+        self.Algorithms = [
+            ("DFS", "DFS", 5, 1),
+            ("BFS", "BFS", 5, 2),
+            ("A* Finding", "A*", 5, 3),
+        ]
         # Graphic variables
         self.screen = pygame.display.set_mode(Constant.WINDOW_SIZE)
         self.screen.fill(Color.GRAY)
+
     def clear(self):
         self.openNodes = []
         self.closedNodes = []
@@ -46,59 +53,59 @@ class Map:
 
     def VisualizeUI(self):
         root = Tk()
-        root.title("Path Finding Visualizer")
-        root.geometry("400x150")
+        root.title("Path Finding Visualizer Setting")
+        root.geometry("600x200")
+        root.grid_columnconfigure(5, minsize=3)
+
+        instructLabel = Label(root, text = "Type in (x,y), where 0 <= x,y < 50")
+        instructLabel.grid(row = 0, column = 1)
         startLabel = Label(root, text="Start",  font = ("Helvetica",12))
-        startLabel.grid(row=0)
+        startLabel.grid(row=1)
         startLabel.config(width=10)
 
+        startInput = Entry(root, width=70)
+        startInput.grid(row=1, column=1)
+
+        startEXLabel = Label(root,text = "EX: (1,1)", font = ("Helvetica",8))
+        startEXLabel.grid(row= 2, column=1)
+
         endLabel = Label(root, text="Target", font=("Helvetica", 12))
-        endLabel.grid(row=1)
+        endLabel.grid(row=3)
         endLabel.config(width = 10)
 
-        startInput = Entry(root, width = 40)
-        startInput.grid(row=0, column=1)
-        endInput = Entry(root, width = 40)
-        endInput.grid(row=1, column=1)
+        endInput = Entry(root, width=70)
+        endInput.grid(row=3, column=1)
+
+        endEXLabel = Label(root, text="EX: (49,49)", font=("Helvetica", 8))
+        endEXLabel.grid(row=4, column=1)
+
+        algorithmLabel = Label(root,text = "Algorithm: ", font = ("Helvetica",10))
+        algorithmLabel.grid(row= 5, column=0)
+
+        self.algorithmType = StringVar(None,"A*")
+        for text,value,x,y in self.Algorithms:
+            algorithmButton = Radiobutton(root, text = text, variable = self.algorithmType, value = value)
+            algorithmButton.grid(row = x, column = y)
+
+        visibleLabel = Label(root, text="Visibility: ", font=("Helvetica", 10))
+        visibleLabel.grid(row=6, column=0)
 
         self.isPathVisible = BooleanVar()
         visibleCheckButton = Checkbutton(root, text = "Show Path", variable = self.isPathVisible, onvalue = 1, offvalue = 0)
-        visibleCheckButton.grid(row = 3, column = 1)
+        visibleCheckButton.grid(row = 6, column = 1)
 
-        showButton = Button(root, text="Show", command=lambda: self.submitInput(root, startInput, endInput),
+
+
+        showButton = Button(root, text="Show", command=lambda: self.submitInput(root,startInput, endInput),
                             font=("Helvetica", 10), width=8, height=1)
-        showButton.place(x = 150, y = 85)
-        exitButton = Button(root, text="Exit", command=lambda: quit,  font = ("Helvetica", 10), width = 8, height = 1)
-        exitButton.place(x = 250, y = 85)
+        showButton.place(x = 400, y = 160)
 
+        exitButton = Button(root, text="Exit", command= quit,  font = ("Helvetica", 10), width = 8, height = 1)
+        exitButton.place(x = 500, y = 160)
         pygame.display.update()
         pygame.init()
         root.mainloop()
-        running = True
-        try:
-            while running:
-                for e in pygame.event.get():
-                    if e.type == pygame.QUIT:
-                        running = False
-                        pygame.quit()
-                        sys.exit()
-                        break
 
-                    elif e.type == pygame.KEYDOWN:
-                        if e.key == pygame.K_SPACE:
-                            running = False
-                            break
-
-                    elif pygame.mouse.get_pressed()[0]:
-                        mx, my = pygame.mouse.get_pos()
-                        mx = int(mx / 12)
-                        my = int(my / 12)
-                        if mx is not self.targetGrid.x and my is not self.targetGrid.y:
-                            self.map[mx][my].drawColor(self.screen, Color.WHITE)
-                            self.map[mx][my].setWall()
-                        pygame.display.update()
-        except SystemExit:
-            pygame.quit()
     def submitInput(self,root,e1,e2):
         i = 0
         j = 0
@@ -131,8 +138,9 @@ class Map:
             self.targetGrid = self.map[i][j]
             self.targetGrid.drawColor(self.screen, Color.LIME)
             pygame.display.update()
-            root.destroy()
             self.setup()
+            root.quit()
+            root.wm_withdraw()
 
     def setup(self):
         currentGrid = self.startGrid
@@ -153,7 +161,7 @@ class Map:
             i+=1
         return neighbors
 
-    def run(self):
+    def computeAStar(self):
         running = True
         self.time = time.time()
         while (running):
@@ -181,7 +189,12 @@ class Map:
                     currentGrid = currentGrid.parent
 
                 timeTaken = time.time() - self.time
-                status = messagebox.askokcancel(title="Done!", message =  "Program has taken " + str(timeTaken) + " \nWould you like to continue?")
+                root = Tk()
+                root.withdraw()
+                status = messagebox.askokcancel(title="Done!", message="Program has taken " + str(
+                    timeTaken) + " \nWould you like to continue?")
+                root.destroy()
+
                 if status:
                     pygame.quit()
                     return True
@@ -211,16 +224,18 @@ class Map:
 
                 # Already in openNode
                 if neighbors[i] in self.openNodes:
-                    if isDiagonal :
+                    if isDiagonal:
                         if neighbors[i].g_cost > (currentGrid.g_cost + currentGrid.diagonalWeight):
-                            print("updating cost from ", neighbors[i].g_cost, " to ", currentGrid.g_cost + currentGrid.diagonalWeight)
+                            print("updating cost from ", neighbors[i].g_cost, " to ",
+                                  currentGrid.g_cost + currentGrid.diagonalWeight)
                             distance = self.findHCost(neighbors[i])
                             neighbors[i].updateCost(distance, currentGrid.g_cost, isDiagonal)
                             neighbors[i].setParent(currentGrid)
 
-                    if not isDiagonal :
-                         if neighbors[i].g_cost > (currentGrid.g_cost + currentGrid.weight):
-                            print("updating cost from ", neighbors[i].g_cost, " to ", currentGrid.g_cost + currentGrid.weight)
+                    if not isDiagonal:
+                        if neighbors[i].g_cost > (currentGrid.g_cost + currentGrid.weight):
+                            print("updating cost from ", neighbors[i].g_cost, " to ",
+                                  currentGrid.g_cost + currentGrid.weight)
                             distance = self.findHCost(neighbors[i])
                             neighbors[i].updateCost(distance, currentGrid.g_cost, isDiagonal)
                             neighbors[i].setParent(currentGrid)
@@ -234,3 +249,52 @@ class Map:
                     self.startGrid.drawColor(self.screen, Color.LIME)
                     self.closedNodes[i].drawColor(self.screen, Color.SKYBLUE)
                 pygame.display.update()
+
+    def computeBFS(self):
+
+    def computeDFS(self):
+         
+    def run(self):
+        running = True
+        try:
+            while running:
+                for e in pygame.event.get():
+                    if e.type == pygame.QUIT:
+                        running = False
+                        pygame.quit()
+                        sys.exit()
+                        break
+
+                    elif e.type == pygame.KEYDOWN:
+                        if e.key == pygame.K_SPACE:
+                            running = False
+                            break
+
+                    elif pygame.mouse.get_pressed()[0]:
+                        mx, my = pygame.mouse.get_pos()
+                        mx = int((mx - 25) / 11)
+                        my = int((my - 25) / 11)
+                        print("mx : ",mx)
+                        print("my: ",my)
+                        if mx + 1 < Constant.WIDTH and my < Constant.HEIGHT:
+                            self.map[mx][my].drawColor(self.screen, Color.WHITE)
+                            self.map[mx][my].setWall()
+                            self.map[mx + 1][my].drawColor(self.screen, Color.WHITE)
+                            self.map[mx + 1][my].setWall()
+                        pygame.display.update()
+        except SystemExit:
+            pygame.quit()
+        print(1)
+        algorithm = self.algorithmType.get()
+        print(algorithm)
+        if (algorithm == "A*"):
+            return self.computeAStar()
+
+        elif (algorithm == "BFS"):
+            return self.computeBFS()
+
+        elif (algorithm == "DFS"):
+            return self.computeDFS()
+
+        else:
+            return
