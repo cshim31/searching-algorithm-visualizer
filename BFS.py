@@ -32,15 +32,14 @@ class BFS:
         self.setVisited(self.isVisited, self.startGrid)
 
     def pushQueue(self, queue, grid):
-        queue.put(grid)
+        isVisited = self.isVisited
         neighbors = grid.neighbor[:]
         for i in range (len(neighbors)):
-            if self.getVisited(self.isVisited,neighbors[i]):
+            if self.getVisited(isVisited, neighbors[i]):
                 continue
             queue.put(neighbors[i])
+            self.setVisited(isVisited, neighbors[i])
             neighbors[i].setParent(grid)
-            print("Setting parent: ", grid.x,grid.y)
-            print("From : ", neighbors[i].x,neighbors[i].y)
 
     def setVisited(self, isVisited, grid):
         isVisited[grid.x][grid.y] = True
@@ -53,20 +52,18 @@ class BFS:
 
         queue = self.queue
         isVisited = self.isVisited
-        map = self.map
+        startGrid = self.startGrid
+        targetGrid = self.targetGrid
+        isPathVisible = self.isPathVisible.get()
         self.time = time.time()
-        while(queue):
-            grid = queue.get()
 
+        while not queue.empty():
+            grid = queue.get()
             if grid.isWall:
                 continue
 
-            # Already Visited Grid
-            if self.getVisited(isVisited,grid):
-                continue
-
             #target found
-            if grid.x is self.targetGrid.x and grid.y is self.targetGrid.y:
+            if grid is targetGrid:
                 self.grid = grid
                 numGrid = 0
                 while self.grid is not None:
@@ -74,6 +71,7 @@ class BFS:
                     pygame.display.update()
                     numGrid += 1
                     self.grid = self.grid.parent
+
                 timeTaken = time.time() - self.time
                 root = Tk()
                 root.withdraw()
@@ -90,12 +88,27 @@ class BFS:
                     sys.exit()
                     return False
 
-            self.pushQueue(queue, grid)
             self.setVisited(isVisited, grid)
+            self.pushQueue(queue, grid)
 
-            if self.isPathVisible.get():
-                self.startGrid.drawColor(self.screen, Color.BLUE)
+
+            if isPathVisible:
+                startGrid.drawColor(self.screen, Color.BLUE)
                 grid.drawColor(self.screen, Color.SKYBLUE)
                 pygame.display.update()
 
+        # target not found
+        root = Tk()
+        root.withdraw()
+        status = messagebox.askokcancel(title="Failed", message="Program has failed reaching to target\nWould you like to continue?")
+        root.destroy()
+
+        if status:
+            pygame.quit()
+            return True
+
+        if not status:
+            pygame.quit()
+            sys.exit()
+            return False
 

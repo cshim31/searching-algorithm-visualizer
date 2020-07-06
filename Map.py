@@ -3,6 +3,7 @@ import Constant, Color
 from AStar import AStar
 from BFS import BFS
 from DFS import DFS
+from Dijkstra import Dijkstra
 
 import math
 import sys,pygame
@@ -21,6 +22,7 @@ class Map:
             ("DFS", "DFS", 5, 1),
             ("BFS", "BFS", 5, 2),
             ("A* Finding", "A*", 5, 3),
+            ("Dijkstra", "Dijkstra", 5, 4),
         ]
         # Graphic variables
         self.screen = pygame.display.set_mode(Constant.WINDOW_SIZE)
@@ -174,6 +176,10 @@ class Map:
         elif (algorithm == "DFS"):
             DFSAlgorithm = DFS(self.map, self.startGrid, self.targetGrid, self.isPathVisible,self.screen)
             return DFSAlgorithm.run()
+
+        elif (algorithm == "Dijkstra"):
+            DijkstraAlgorithm = Dijkstra(self.map, self.startGrid, self.targetGrid, self.isPathVisible,self.screen)
+            return DijkstraAlgorithm.run()
 
         else:
             return
