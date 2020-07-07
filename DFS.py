@@ -24,7 +24,7 @@ class DFS:
         self.isVisited = [[0 for i in range(Constant.WIDTH)] for i in range(Constant.HEIGHT)]
         for i in range(Constant.HEIGHT):
             for j in range(Constant.WIDTH):
-                self.map[i][j].appendNeighbor(map)
+                self.map[i][j].appendNeighbor(self.map)
                 self.isVisited[i][j] = False
 
     def setVisited(self, isVisited, grid):
@@ -51,6 +51,8 @@ class DFS:
             numGrid = 0
             while self.grid is not None:
                 self.grid.drawColor(self.screen, Color.LIME)
+                self.startGrid.drawColor(self.screen, Color.RED)
+                self.targetGrid.drawColor(self.screen, Color.RED)
                 pygame.display.update()
                 numGrid += 1
                 self.grid = self.grid.parent
@@ -77,8 +79,7 @@ class DFS:
             return False
 
     def dfs(self,grid):
-        print(grid.x," ",grid.y)
-        time.sleep(0.01)
+        time.sleep(0.001)
         stack = []
         isVisited = self.isVisited
         if grid.isWall:
@@ -107,7 +108,7 @@ class DFS:
 
     def run(self):
         #sys.setrecursionlimit(1500)
-        self.setup(self.map)
+        self.setup()
         self.time = time.time()
         targetFound = self.dfs(self.startGrid)
         if targetFound:

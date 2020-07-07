@@ -36,11 +36,11 @@ class Dijkstra:
             isDiagonal = self.validateDiagonality(currentGrid, neighbors[i])
             neighbors[i].updateCost(0, currentGrid.g_cost, isDiagonal)
 
-    def getSmallIndex(self):
+    #def getSmallIndex(self):
 
-    def dijkstra(self):
+    #def dijkstra(self):
 
-    def run(self):
+    #def run(self):
         self.setup()
         self.time = time.time()
         selt.dijkstra()

@@ -19,10 +19,10 @@ class Map:
         self.isPathVisible = None
         self.algorithmType = None
         self.Algorithms = [
-            ("DFS", "DFS", 5, 1),
-            ("BFS", "BFS", 5, 2),
-            ("A* Finding", "A*", 5, 3),
-            ("Dijkstra", "Dijkstra", 5, 4),
+            ("DFS", "DFS", 100, 110),
+            ("BFS", "BFS", 250, 110),
+            ("A* Finding", "A*", 400, 110),
+            ("Dijkstra", "Dijkstra", 550, 110),
         ]
         # Graphic variables
         self.screen = pygame.display.set_mode(Constant.WINDOW_SIZE)
@@ -43,8 +43,7 @@ class Map:
     def VisualizeUI(self):
         root = Tk()
         root.title("Path Finding Visualizer Setting")
-        root.geometry("600x200")
-        root.grid_columnconfigure(5, minsize=3)
+        root.geometry("630x210")
 
         instructLabel = Label(root, text = "Type in (x,y), where 0 <= x,y < 50")
         instructLabel.grid(row = 0, column = 1)
@@ -74,23 +73,23 @@ class Map:
         self.algorithmType = StringVar(None,"A*")
         for text,value,x,y in self.Algorithms:
             algorithmButton = Radiobutton(root, text = text, variable = self.algorithmType, value = value)
-            algorithmButton.grid(row = x, column = y)
+            algorithmButton.place(x = x, y = y)
 
         visibleLabel = Label(root, text="Visibility: ", font=("Helvetica", 10))
-        visibleLabel.grid(row=6, column=0)
+        visibleLabel.grid(row=6, column=0, pady = 5)
 
         self.isPathVisible = BooleanVar()
         visibleCheckButton = Checkbutton(root, text = "Show Path", variable = self.isPathVisible, onvalue = 1, offvalue = 0)
-        visibleCheckButton.grid(row = 6, column = 1)
+        visibleCheckButton.grid(row = 6, column = 1, pady = 5)
 
 
 
         showButton = Button(root, text="Show", command=lambda: self.submitInput(root,startInput, endInput),
                             font=("Helvetica", 10), width=8, height=1)
-        showButton.place(x = 400, y = 160)
+        showButton.place(x = 400, y = 165)
 
         exitButton = Button(root, text="Exit", command= quit,  font = ("Helvetica", 10), width = 8, height = 1)
-        exitButton.place(x = 500, y = 160)
+        exitButton.place(x = 500, y = 165)
         pygame.display.update()
         pygame.init()
         root.mainloop()

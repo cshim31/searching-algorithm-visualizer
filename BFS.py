@@ -25,7 +25,7 @@ class BFS:
         self.isVisited = [[0 for i in range(Constant.WIDTH)] for i in range(Constant.HEIGHT)]
         for i in range(Constant.HEIGHT):
             for j in range(Constant.WIDTH):
-                self.map[i][j].appendNeighbor(map)
+                self.map[i][j].appendNeighbor(self.map)
                 self.isVisited[i][j] = False
 
         self.pushQueue(self.queue, self.startGrid)
@@ -48,7 +48,7 @@ class BFS:
         return isVisited[grid.x][grid.y]
 
     def run(self):
-        self.setup(self.queue, self.map)
+        self.setup()
 
         queue = self.queue
         isVisited = self.isVisited
