@@ -19,12 +19,12 @@ class DFS:
         self.time = None
         self.isVisited = []
 
-    def setup(self, map):
+    def setup(self):
         # create neighbor
         self.isVisited = [[0 for i in range(Constant.WIDTH)] for i in range(Constant.HEIGHT)]
         for i in range(Constant.HEIGHT):
             for j in range(Constant.WIDTH):
-                map[i][j].appendNeighbor(map)
+                self.map[i][j].appendNeighbor(map)
                 self.isVisited[i][j] = False
 
     def setVisited(self, isVisited, grid):
@@ -43,36 +43,52 @@ class DFS:
             self.setVisited(isVisited, neighbors[i])
             neighbors[i].setParent(grid)
 
-    def dfs(self,grid):
-        stack = []
-        isVisited = self.isVisited
-        if grid.isWall:
-            return
-
-        # target found
-        if grid is self.targetGrid:
-            self.grid = grid
+    def showPopUp(self, targetFound):
+        title = ""
+        message = ""
+        if targetFound:
+            timeTaken = time.time() - self.time
             numGrid = 0
             while self.grid is not None:
                 self.grid.drawColor(self.screen, Color.LIME)
                 pygame.display.update()
                 numGrid += 1
                 self.grid = self.grid.parent
-            timeTaken = time.time() - self.time
-            root = Tk()
-            root.withdraw()
-            status = messagebox.askokcancel(title="Done!", message="Program has taken " + str(
-                timeTaken) + " seconds and " + str(numGrid) + " steps\nWould you like to continue?")
-            root.destroy()
+            title = "Done!"
+            message = "Program has taken " + str(
+            timeTaken) + " seconds and " + str(numGrid) + " steps\nWould you like to continue?"
 
-            if status:
-                pygame.quit()
-                return True
+        if not targetFound:
+            title = "Failed"
+            message = "Program has failed reaching to target\nWould you like to continue?"
 
-            if not status:
-                pygame.quit()
-                sys.exit()
-                return False
+        root = Tk()
+        root.withdraw()
+        status = messagebox.askokcancel(title=title, message= message)
+        root.destroy()
+
+        if status:
+            pygame.quit()
+            return True
+
+        if not status:
+            pygame.quit()
+            sys.exit()
+            return False
+
+    def dfs(self,grid):
+        print(grid.x," ",grid.y)
+        time.sleep(0.01)
+        stack = []
+        isVisited = self.isVisited
+        if grid.isWall:
+            return False
+
+        # target found
+        if grid is self.targetGrid:
+            self.grid = grid
+            print("target Found ! x: ", grid.x, " y: ", grid.y)
+            return True
 
         self.setVisited(isVisited,grid)
         self.pushStack(stack,grid)
@@ -83,11 +99,18 @@ class DFS:
             pygame.display.update()
 
         while stack:
-            self.dfs(stack.pop())
+            targetFound = self.dfs(stack.pop())
+            if targetFound:
+                return True
 
+        return False
 
     def run(self):
         #sys.setrecursionlimit(1500)
         self.setup(self.map)
         self.time = time.time()
-        return self.dfs(self.startGrid)
+        targetFound = self.dfs(self.startGrid)
+        if targetFound:
+            return self.showPopUp(targetFound)
+        if not targetFound:
+            return self.showPopUp(not targetFound)

@@ -150,8 +150,6 @@ class Map:
                         mx, my = pygame.mouse.get_pos()
                         mx = int((mx - 25) / 11)
                         my = int((my - 25) / 11)
-                        print("mx : ", mx)
-                        print("my: ", my)
                         if mx + 1 < Constant.WIDTH and my < Constant.HEIGHT:
                             self.map[mx][my].drawColor(self.screen, Color.WHITE)
                             self.map[mx][my].setWall()
@@ -162,7 +160,6 @@ class Map:
             pygame.quit()
 
     def run(self):
-        print(self.isPathVisible.get())
         self.listenConfiguration()
         algorithm = self.algorithmType.get()
         if (algorithm == "A*"):

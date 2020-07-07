@@ -20,15 +20,15 @@ class BFS:
         self.isVisited = []
         self.queue = queue.Queue()
 
-    def setup(self, queue, map):
+    def setup(self):
         # create neighbor
         self.isVisited = [[0 for i in range(Constant.WIDTH)] for i in range(Constant.HEIGHT)]
         for i in range(Constant.HEIGHT):
             for j in range(Constant.WIDTH):
-                map[i][j].appendNeighbor(map)
+                self.map[i][j].appendNeighbor(map)
                 self.isVisited[i][j] = False
 
-        self.pushQueue(queue, self.startGrid)
+        self.pushQueue(self.queue, self.startGrid)
         self.setVisited(self.isVisited, self.startGrid)
 
     def pushQueue(self, queue, grid):

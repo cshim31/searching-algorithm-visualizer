@@ -12,6 +12,8 @@ class Grid:
         self.parent = None
         self.color = 0
         self.isWall = False
+        self.isStart = False
+        self.isTarget = False
         self.weight = 10
         self.diagonalWeight = 14
 
