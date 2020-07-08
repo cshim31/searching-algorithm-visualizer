@@ -22,7 +22,7 @@ class Map:
             ("DFS", "DFS", 100, 110),
             ("BFS", "BFS", 250, 110),
             ("A* Finding", "A*", 400, 110),
-            ("Dijkstra", "Dijkstra", 550, 110),
+            #("Dijkstra", "Dijkstra", 550, 110),
         ]
         # Graphic variables
         self.screen = pygame.display.set_mode(Constant.WINDOW_SIZE)
@@ -34,6 +34,20 @@ class Map:
 
     def constructMap(self):
         self.map = [[0 for i in range(Constant.WIDTH)] for i in range(Constant.HEIGHT)]
+        pygame.font.init()
+        font = pygame.font.SysFont("monospace", 15)
+
+        pygame.draw.rect(self.screen, Color.RED,(Constant.GRID_PADDING + 100, Constant.GRID_PADDING / 2 - 5, 550 / Constant.WIDTH, 550 / Constant.HEIGHT))
+        label = font.render("Start & Target", 1, (0, 0, 0))
+        self.screen.blit(label, (Constant.GRID_PADDING + 100 + 15, Constant.GRID_PADDING / 2 - 8))
+
+        pygame.draw.rect(self.screen, Color.LIME, (Constant.GRID_PADDING + 300, Constant.GRID_PADDING / 2 - 5, 550 / Constant.WIDTH, 550 / Constant.HEIGHT))
+        label = font.render("Path", 1, (0,0,0))
+        self.screen.blit(label, (Constant.GRID_PADDING + 300 + 15, Constant.GRID_PADDING / 2 - 8))
+
+        pygame.draw.rect(self.screen, Color.SKYBLUE, (Constant.GRID_PADDING + 400, Constant.GRID_PADDING / 2 - 5, 550 / Constant.WIDTH, 550 / Constant.HEIGHT))
+        label = font.render("Visited Grid", 1, (0, 0, 0))
+        self.screen.blit(label, (Constant.GRID_PADDING + 400 + 15, Constant.GRID_PADDING / 2 - 8))
 
         for i in range(Constant.WIDTH):
             for j in range(Constant.HEIGHT):
@@ -54,7 +68,7 @@ class Map:
         startInput = Entry(root, width=70)
         startInput.grid(row=1, column=1)
 
-        startEXLabel = Label(root,text = "EX: (1,1)", font = ("Helvetica",8))
+        startEXLabel = Label(root,text = "EX: 1,1", font = ("Helvetica",8))
         startEXLabel.grid(row= 2, column=1)
 
         endLabel = Label(root, text="Target", font=("Helvetica", 12))
@@ -64,7 +78,7 @@ class Map:
         endInput = Entry(root, width=70)
         endInput.grid(row=3, column=1)
 
-        endEXLabel = Label(root, text="EX: (49,49)", font=("Helvetica", 8))
+        endEXLabel = Label(root, text="EX: 49,49", font=("Helvetica", 8))
         endEXLabel.grid(row=4, column=1)
 
         algorithmLabel = Label(root,text = "Algorithm: ", font = ("Helvetica",10))
@@ -119,12 +133,12 @@ class Map:
             i = int(startPoint.split(',')[0])
             j = int(startPoint.split(',')[1])
             self.startGrid = self.map[i][j]
-            self.startGrid.drawColor(self.screen, Color.LIME)
+            self.startGrid.drawColor(self.screen, Color.RED)
 
             i = int(targetPoint.split(',')[0])
             j = int(targetPoint.split(',')[1])
             self.targetGrid = self.map[i][j]
-            self.targetGrid.drawColor(self.screen, Color.LIME)
+            self.targetGrid.drawColor(self.screen, Color.RED)
             pygame.display.update()
             root.wm_withdraw()
             root.destroy()

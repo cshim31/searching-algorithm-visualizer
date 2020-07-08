@@ -68,10 +68,11 @@ class BFS:
                 numGrid = 0
                 while self.grid is not None:
                     self.grid.drawColor(self.screen, Color.LIME)
+                    startGrid.drawColor(self.screen, Color.RED)
+                    targetGrid.drawColor(self.screen, Color.RED)
                     pygame.display.update()
                     numGrid += 1
                     self.grid = self.grid.parent
-
                 timeTaken = time.time() - self.time
                 root = Tk()
                 root.withdraw()
@@ -93,7 +94,6 @@ class BFS:
 
 
             if isPathVisible:
-                startGrid.drawColor(self.screen, Color.BLUE)
                 grid.drawColor(self.screen, Color.SKYBLUE)
                 pygame.display.update()
 

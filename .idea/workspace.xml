@@ -3,9 +3,10 @@
   <component name="ChangeListManager">
     <list default="true" id="56f978ff-270d-4512-bf05-943c2a80577b" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AStar.py" beforeDir="false" afterPath="$PROJECT_DIR$/AStar.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BFS.py" beforeDir="false" afterPath="$PROJECT_DIR$/BFS.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DFS.py" beforeDir="false" afterPath="$PROJECT_DIR$/DFS.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Dijkstra.py" beforeDir="false" afterPath="$PROJECT_DIR$/Dijkstra.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Constant.py" beforeDir="false" afterPath="$PROJECT_DIR$/Constant.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Grid.py" beforeDir="false" afterPath="$PROJECT_DIR$/Grid.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Map.py" beforeDir="false" afterPath="$PROJECT_DIR$/Map.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -128,22 +129,22 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="414" y="179" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1591157476065" />
-    <state width="467" height="281" key="GridCell.Tab.0.bottom" timestamp="1594161715053">
+    <state width="949" height="281" key="GridCell.Tab.0.bottom" timestamp="1594174281583">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="467" height="281" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1594161715053" />
-    <state width="467" height="281" key="GridCell.Tab.0.center" timestamp="1594161715053">
+    <state width="949" height="281" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1594174281583" />
+    <state width="949" height="281" key="GridCell.Tab.0.center" timestamp="1594174281582">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="467" height="281" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1594161715053" />
-    <state width="467" height="281" key="GridCell.Tab.0.left" timestamp="1594161715053">
+    <state width="949" height="281" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1594174281582" />
+    <state width="949" height="281" key="GridCell.Tab.0.left" timestamp="1594174281582">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="467" height="281" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1594161715053" />
-    <state width="467" height="281" key="GridCell.Tab.0.right" timestamp="1594161715053">
+    <state width="949" height="281" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1594174281582" />
+    <state width="949" height="281" key="GridCell.Tab.0.right" timestamp="1594174281582">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="467" height="281" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1594161715053" />
+    <state width="949" height="281" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1594174281582" />
     <state width="949" height="348" key="GridCell.Tab.1.bottom" timestamp="1594101941067">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -174,7 +175,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/AStar.py</url>
-          <line>156</line>
+          <line>160</line>
           <option name="timeStamp" value="20" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">

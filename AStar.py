@@ -57,6 +57,8 @@ class AStar:
 
     def run(self):
         self.setup()
+        startGrid = self.startGrid
+        targetGrid = self.targetGrid
         running = True
         self.time = time.time()
         while (running):
@@ -98,6 +100,8 @@ class AStar:
                 numGrid = 1
                 while currentGrid != None:
                     currentGrid.drawColor(self.screen, Color.LIME)
+                    startGrid.drawColor(self.screen, Color.RED)
+                    targetGrid.drawColor(self.screen, Color.RED)
                     pygame.display.update()
                     currentGrid = currentGrid.parent
                     numGrid += 1
@@ -156,10 +160,10 @@ class AStar:
             # graphic
             if self.isPathVisible.get():
                 for i in range(len(self.openNodes)):
-                    self.startGrid.drawColor(self.screen, Color.LIME)
+                    self.startGrid.drawColor(self.screen, Color.RED)
                     self.openNodes[i].drawColor(self.screen, Color.BLUE)
 
                 for i in range(len(self.closedNodes)):
-                    self.startGrid.drawColor(self.screen, Color.LIME)
+                    self.startGrid.drawColor(self.screen, Color.RED)
                     self.closedNodes[i].drawColor(self.screen, Color.SKYBLUE)
                 pygame.display.update()
