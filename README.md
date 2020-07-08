@@ -1,14 +1,12 @@
 # Path-Finding-Visualizer
-Path finding visualizer software application for Windows, Mac OS X and Linux. Code implements A* pathfinding algorithm. Program is conducted using python.
+Path finding visualizer software application for Windows, Mac OS X and Linux. Code implements various path finding algorithm. Program is made by python. <br/><br/>
+<img src = "img/K-036.png" alt = "Screenshot of a path finding visualizer program" style = "max-width:100%;"/> <br/>
 ## Features
-* Simple navigation using A* path finding algorithm
-* Supports wall to be drawn on the map for test variation
+* Simple path finding visualizer with BFS, DFS, and A* path finding algorithm
+* Supports wall being drawn on the map for test variation
 
-## Examples
-* Path_Finding/Grid.py - Grid class that fills map with display function and each grid's coordinates variable.
-* Path_Finding/Main.py - main file where compiling takes place. 
 ## Install
-Program can be ran by python. Install Python and pygame by typing following command :\
+Program requires pygame installation. Install pygame by typing following command :\
 
 For windows:\
 pip install pygame
@@ -21,8 +19,8 @@ sudo apt-get install python-pygame
 
 ## Compile and run
 For git Cloning, type in following command on git bash\
-git clone https://github.com/cshim31/Path_Finding.git 
+git clone https://github.com/cshim31/Path-Finding-Visualizer.git
 
-Once compiled, type in starting x,y coordinates and destination. Then, press "Enter" Key to start the program.\
-Walls can be drawn by pressing mouse left click. After typing in starting x,y coordinate and destination, you are allowed to draw walls. You can create your own wall to test different simulation.
+Once compiled, type in starting x,y coordinates, destination, and other selections. Then, press "Enter" Key to start the program.\
+Then, user can draw the wall by pressing mouse left click. You can create your own wall to test different simulation.
 
