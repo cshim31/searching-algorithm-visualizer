@@ -1,6 +1,6 @@
 # Path-Finding-Visualizer
 Path finding visualizer software application for Windows, Mac OS X and Linux. Code implements various path finding algorithm. Program is made by python. <br/><br/>
-<img src = "img/K-036.png" alt = "Screenshot of a path finding visualizer program" style = "max-width:100%;"/> <br/>
+<img src = "img/portfolio2.png" alt = "Screenshot of a path finding visualizer program" style = "max-width:100%;"/> <br/>
 ## Features
 * Simple path finding visualizer with BFS, DFS, and A* path finding algorithm
 * Supports wall being drawn on the map for test variation
