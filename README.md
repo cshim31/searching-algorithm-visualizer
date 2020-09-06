@@ -22,6 +22,6 @@ git clone https://github.com/cshim31/Path-Finding-Visualizer.git \
 python Main.py
 
 Once compiled, dialog box will pop and prompt you to type in starting and target (x,y) coordinates and types of algorithm to perform. \
-For various simulation under different environment, users are allowed to draw distracting feature (Wall) by keep pressing left mouse-click and drawing on the grid.\
-Press "Space" Key to start the program.\
+For various simulation under different environment, users are allowed to draw distracting feature (Wall) by keep pressing left mouse-click and drawing on the grid. \
+Press "Space" Key to start the program.
 
