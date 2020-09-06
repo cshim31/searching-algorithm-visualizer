@@ -18,8 +18,8 @@ For Linux:\
 sudo apt-get install python-pygame
 
 ## Compile and run
-For git Cloning, type in following command on git bash\
-git clone https://github.com/cshim31/Path-Finding-Visualizer.git
+git clone https://github.com/cshim31/Path-Finding-Visualizer.git \
+python Main.py
 
 Once compiled, type in starting x,y coordinates, destination, and other selections. Then, press "Enter" Key to start the program.\
 Then, user can draw the wall by pressing mouse left click. You can create your own wall to test different simulation.
