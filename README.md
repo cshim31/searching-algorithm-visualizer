@@ -21,6 +21,7 @@ sudo apt-get install python-pygame
 git clone https://github.com/cshim31/Path-Finding-Visualizer.git \
 python Main.py
 
-Once compiled, type in starting x,y coordinates, destination, and other selections. Then, press "Enter" Key to start the program.\
-Then, user can draw the wall by pressing mouse left click. You can create your own wall to test different simulation.
+Once compiled, dialog box will pop and prompt you to type in starting and target (x,y) coordinates and types of algorithm to perform. \
+For various simulation under different environment, users are allowed to draw distracting feature (Wall) by keep pressing left mouse-click and drawing on the grid.\
+Press "Space" Key to start the program.\
 
