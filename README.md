@@ -1,27 +1,51 @@
-# Path-Finding-Visualizer
-Path finding visualizer software application for Windows, Mac OS X and Linux. Code implements various path finding algorithm. Program is made by python. <br/><br/>
-<img src = "img/portfolio2.png" alt = "Screenshot of a path finding visualizer program" style = "max-width:100%;"/> <br/>
+<p align="center">
+ <img src = "img/portfolio2.png" alt = "Screenshot of a path finding visualizer program" style="width:500px;height:500px;"/>
+</p>
+
+<p align="center">
+ <strong>This is open source path finding algorithm simulator using Python.</strong>
+</p>
+
+## Getting Started
+### Building and installing
+#### Prereqs:
+- A Python compiler (Python 3.9.5+)
+- A Pygame v2.0.1+ to enable support for graphic
+
+<p> After downloading a source, Clone the repository.</p>
+    
+    git clone https://github.com/cshim31/Path-Finding-Visualizer.git
+    
+<p> Navigate to repository and run </p>    
+
+    python main.py
+    
 ## Features
-* Simple path finding visualizer with BFS, DFS, and A* path finding algorithm
-* Supports wall being drawn on the map for test variation
 
-## Install
-Program requires pygame installation. Install pygame by typing following command :\
+### What does a checkmark mean?
 
-For windows:\
-pip install pygame
+</p>When an item is checkmarked, it means the implementation is complete. Uncheckmarked means implementation planned in future. 
 
-For Max OS X:\
-sudo pip3 install hg+http://bitbucket.org/pygame/pygame
+- Supported algorithm :
+  - [x] BFS
+  - [x] DFS
+  - [ ] Dijkstra's
+  - [ ] Floyd-Warshall
+  - [x] A* path finding  
+ 
+### How to draw Wall 
+</p>Supports wall painting on map. This affects algorithm simulation and generates different path based on shape of wall.
+</p>Simply keep mouse left clicked and drag it.
 
-For Linux:\
-sudo apt-get install python-pygame
 
-## Compile and run
-git clone https://github.com/cshim31/Path-Finding-Visualizer.git \
-python Main.py
+## Starting Simulation
+<p>To start a simulation:</p>
 
-Once compiled, dialog box will pop and prompt you to type in starting and target (x,y) coordinates and types of algorithm to perform. \
-For various simulation under different environment, users are allowed to draw distracting feature (Wall) by keep pressing left mouse-click and drawing on the grid. \
-Press "Space" Key to start the program.
+    Spacebar
+  
+
+
+
+
+
 
