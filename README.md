@@ -3,7 +3,7 @@
 </div>
 
 <p align="center">
- <strong>This is open source rhythm game using Java.</strong>
+ <strong>This is open source path finding algorithm simulator using Python.</strong>
 </p>
 
 ## Getting Started
