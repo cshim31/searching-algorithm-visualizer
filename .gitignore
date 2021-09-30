@@ -1,5 +1,6 @@
 # cache files
 /__pycache__
+/__pycache__/*
 
 # project setting files
 /.idea/workspace.xml
