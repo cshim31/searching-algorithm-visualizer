@@ -1,9 +1,9 @@
-<p align="center">
- <img src = "img/portfolio2.png" alt = "Screenshot of a path finding visualizer program" style="width:500px;height:500px;"/>
-</p>
+<div align="center">
+ <img alt="preview" src="https://github.com/cshim31/searching-algorithm-visualizer/blob/master/img/preview.gif" align=center />
+</div>
 
 <p align="center">
- <strong>This is open source path finding algorithm simulator using Python.</strong>
+ <strong>This is open source rhythm game using Java.</strong>
 </p>
 
 ## Getting Started
